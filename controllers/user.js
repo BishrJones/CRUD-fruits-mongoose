@@ -14,6 +14,10 @@ const router = express.Router()
 // Routes
 ////////////////////////////////////////////
 
+// example
+router.get('/', (req, res) => {
+    res.send('helooooooooooooo donut')
+})
 // two sign up routes
 // get to render the signup form
 router.get('/signup', (req, res) => {
@@ -48,7 +52,7 @@ router.get('/login', (req, res) => {
 })
 // post to send the login info(and create a session)
 router.post('/login', async (req, res) => {
-    console.log('request object', req)
+    // console.log('request object', req)
     // get the data from the request body
     const { username, password } = req.body
     // then we search for the user
@@ -65,6 +69,9 @@ router.post('/login', async (req, res) => {
                     // store some properties in the session
                     req.session.username = username
                     req.session.loggedIn = true
+                    req.session.userId = user.id
+
+                    console.log('session user id', req.session.userId)
                     // redirect to /fruits if login is successful
                     res.redirect('/fruits')
                 } else {
